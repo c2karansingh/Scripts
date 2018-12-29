@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Controls : MonoBehaviour {
 
@@ -9,12 +10,15 @@ public class Controls : MonoBehaviour {
     public float forwardSpeed;
     public float sidewaySpeed;
     public float jumpPower;
+    public GameObject gamePanel;
 
     private bool onGround=false;
     private float initialForwardSpeed;
     private float initialSidewaySpeed;
     private Transform groundTrans;
     private bool isGameOver = false;
+
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -29,6 +33,13 @@ public class Controls : MonoBehaviour {
             sidewaySpeed = initialSidewaySpeed;
 
             onGround = true;
+        }
+
+        if (collision.collider.tag == "Finish")
+        {
+
+            gameOver();
+            GameObject.Find("Game Over").GetComponent<Text>().text = "Stage Complete";
         }
     }
 
@@ -77,6 +88,7 @@ public class Controls : MonoBehaviour {
 
     private void gameOver()
     {
+        gamePanel.SetActive(true);
         Debug.Log("Game over");
         forwardSpeed = 0;
         sidewaySpeed = 0;
@@ -84,4 +96,5 @@ public class Controls : MonoBehaviour {
         initialForwardSpeed = 0;
         isGameOver = true;
     }
+
 }
