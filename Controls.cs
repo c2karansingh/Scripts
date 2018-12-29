@@ -49,7 +49,7 @@ public class Controls : MonoBehaviour {
             return;
         }
 
-        if(transform.position.y < groundTrans.position.y/*ground's y*/)
+        if(transform.position.y < groundTrans.position.y)
         {
             gameOver();
         }
